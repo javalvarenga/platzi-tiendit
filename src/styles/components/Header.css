@@ -1,0 +1,55 @@
+.Header {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--mainColor);
+  align-items: center;
+}
+.Header h1 {
+  color: var(--lightText);
+
+  margin: 0;
+  padding: 1rem 0;
+}
+.Header h1:hover{
+  animation-name: colorTransition;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+}
+@keyframes colorTransition {
+  0%{
+    color: var(--lightText);
+
+  }
+  100%{
+    color: var(--terColor);
+  }
+}
+.header-checkout{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Header-alert {
+  position: relative;
+  left: 10px;
+  top:10px;
+  font-weight: 400;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--red);
+  margin: 0;
+  object-fit: contain;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+.header-checkout i{
+    color: var(--terColor);
+    font-size: 1.6rem;
+}
+.header-checkout img {
+  width: 50px;
+  height: 50px;
+}

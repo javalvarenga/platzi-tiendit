@@ -1,0 +1,63 @@
+.Payment {
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.6rem;
+  flex-flow: wrap;
+  display: grid;
+  width: 100%;
+  min-height: 70vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  justify-items: center;
+
+}
+@media (max-width:750px) {
+  .Payment{
+    grid-template-columns: 1fr;
+  }
+}
+.Payment-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.Payment-back {
+  margin: 10px 0 0 0;
+}
+.Payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+  width: 50%;
+}
+.Payment-item .fas {
+  margin: 0 0 0 10px;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.Payment-item button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  max-width: 100px;
+}
+.Payment-button {
+  width: 80%;
+  max-width: 400px;
+}
+.Payment-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+.Payment-element h4 {
+  margin: 0;
+}
+.Payment-content h3{
+  margin-bottom: 1.6rem;
+}

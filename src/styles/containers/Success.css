@@ -1,0 +1,15 @@
+.Success {
+    padding: 3em;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Success-map {
+    margin: 10px 0 0 0;
+  }
+
+  .Success-content{
+    width: 80%;
+    max-width: 1000px;
+  }

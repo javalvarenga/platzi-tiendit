@@ -1,0 +1,25 @@
+:root {
+  --mainColor: #49DCB1;
+  --secondaryColor: #49beaa;
+  --terColor: #7D80DA;
+  --lightText: #fff;
+  --dark:#0B3954;
+  --red: #ef767a;
+  --orange: #eeb868;
+}
+#app {
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a{
+  text-decoration: none;
+  outline: none;
+}
