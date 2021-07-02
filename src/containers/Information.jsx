@@ -1,31 +1,73 @@
-import React, { useContext, useRef } from 'react';
+/* eslint-disable no-unused-expressions */
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { TextField } from '../components/TextField';
 import '../styles/containers/Information.css';
 import AppContext from '../context/AppContext';
 
 function Information() {
+  const validate = Yup.object({
+    name: Yup.string()
+      .max(35, 'Debe tener 35 caracteres o menos')
+      .required('Campo Requerido'),
+    email: Yup.string()
+      .max(25, 'Debe tener 25 caracteres o menos')
+      .required('Campo Requerido'),
+    address: Yup.string()
+      .max(50, 'Debe tener 50 caracteres o menos')
+      .required('Campo Requerido'),
+    apto: Yup.string()
+      .max(15, 'Debe tener 15 caracteres o menos')
+      .required('Campo Requerido'),
+    city: Yup.string()
+      .max(25, 'Debe tener 25 caracteres o menos')
+      .required('Campo Requerido'),
+    country: Yup.string()
+      .max(25, 'Debe tener 25 caracteres o menos')
+      .required('Campo Requerido'),
+    state: Yup.string()
+      .max(25, 'Debe tener 25 caracteres o menos')
+      .required('Campo Requerido'),
+    cp: Yup.string()
+      .max(10, 'Debe tener 10 caracteres o menos')
+      .required('Campo Requerido'),
+    phone: Yup.string()
+      .min(8, 'debe tener 8 o más caracteres')
+      .max(12, 'Debe menos de 12 caracteres')
+      .required('Campo Requerido'),
+  });
+
   const { state, addToBuyer } = useContext(AppContext);
   const { cart } = state;
-  const form = useRef(null);
+
   const history = useHistory();
 
-  const handleSubmit = () => {
-    const formData = new FormData(form.current);
+  const validationBuyer = (Buyer) => {
+    if (
+      Buyer.name === '' ||
+      Buyer.email === '' ||
+      Buyer.address === '' ||
+      Buyer.address === '' ||
+      Buyer.apto === '' ||
+      Buyer.city === '' ||
+      Buyer.country === '' ||
+      Buyer.state === '' ||
+      Buyer.cp === '' ||
+      Buyer.phone === ''
+    ) {
+      return false;
+    }
+    return true;
+  };
 
-      const buyer = {
-        'name': formData.get('name'),
-        'email': formData.get('email'),
-        'address': formData.get('address'),
-        'apto': formData.get('apto'),
-        'city': formData.get('city'),
-        'country': formData.get('country'),
-        'state': formData.get('state'),
-        'cp': formData.get('cp'),
-        'phone': formData.get('phone'),
-      };
-
-    addToBuyer(buyer);
-    history.push('/checkout/payment');
+  const handleSubmit = (Buyer) => {
+    console.log(Buyer);
+    if (validationBuyer(Buyer)) {
+      addToBuyer(Buyer);
+      history.push('/checkout/payment');
+    }
   };
 
   return (
@@ -46,32 +88,53 @@ function Information() {
           <h2>Información de Contacto</h2>
         </div>
         <div className="Information-form">
-          <form ref={form}>
-            <input type="text" placeholder="Nombre Completo" name="name" />
-            <input type="text" placeholder="Correo Electrónico" name="email" />
-            <input type="text" placeholder="Dirección" name="address" />
-            <input type="text" placeholder="Apto" name="apto" />
-            <input type="text" placeholder="Ciudad" name="city" />
-            <input type="text" placeholder="País" name="country" />
-            <input type="text" placeholder="Departamento/Estado" name="state" />
-            <input type="text" placeholder="Código Postal" name="cp" />
-            <input type="text" placeholder="Telefono" name="phone" />
-          </form>
-        </div>
-        <div className="Information-buttons">
-          <div className="Information-back">
-            <Link to="/checkout">
-              <i className="fas fa-arrow-left" />
-            </Link>
-          </div>
-          <div className="Information-next">
-   
-              <button type="button" onClick={handleSubmit}>
-                Pagar
-              </button>
-
-
-          </div>
+          <Formik
+            initialValues={{
+              name: '',
+              email: '',
+              address: '',
+              apto: '',
+              city: '',
+              country: '',
+              state: '',
+              cp: '',
+              phone: '',
+            }}
+            validationSchema={validate}
+          >
+            {(formik) => (
+              <div>
+                <h1>Information</h1>
+                {console.log(formik.values)}
+                <Form>
+                  <TextField name="name" type="text" />
+                  <TextField name="email" type="text" />
+                  <TextField name="address" type="text" />
+                  <TextField name="apto" type="text" />
+                  <TextField name="city" type="text" />
+                  <TextField name="country" type="text" />
+                  <TextField name="state" type="text" />
+                  <TextField name="cp" type="text" />
+                  <TextField name="phone" type="text" />
+                  <div className="Information-buttons">
+                    <div className="Information-back">
+                      <Link to="/checkout">
+                        <i className="fas fa-arrow-left" />
+                      </Link>
+                    </div>
+                    <div className="Information-next">
+                      <button
+                        type="submit"
+                        onClick={() => handleSubmit(formik.values)}
+                      >
+                        Pagar
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              </div>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

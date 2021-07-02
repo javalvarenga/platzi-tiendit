@@ -1,0 +1,9 @@
+.is-invalid {
+    border: 3px solid;
+    border-color: var(--orange);
+}
+
+.errorMessage{
+    text-align: left;
+    background-color: var(--orange);
+}

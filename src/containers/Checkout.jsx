@@ -41,7 +41,7 @@ function Checkout() {
         <div className="Checkout-sidebar">
           <h3>Precio Total: ${handleSumTotal()}</h3>
           <Link to="/checkout/information">
-            <button type="submit">Continuar pedido</button>
+            <button type="button">Continuar pedido</button>
           </Link>
         </div>
       )}

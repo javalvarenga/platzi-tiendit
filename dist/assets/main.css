@@ -296,6 +296,13 @@ a{
   background-color: var(--orange);
   padding: 0.6rem 1rem;
 }
+
+.valid{
+  border: 2px solid greenyellow;
+}
+.invalid{
+  border: 2px solid red;
+}
 .Payment {
   grid-template-columns: 1fr 1fr;
   row-gap: 1.6rem;
@@ -379,12 +386,13 @@ a{
   justify-content: space-around;
   background-color: var(--mainColor);
   align-items: center;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 .Header h1 {
   color: var(--lightText);
-
   margin: 0;
-  padding: 1rem 0;
+
 }
 .Header h1:hover{
   animation-name: colorTransition;
@@ -402,13 +410,11 @@ a{
   }
 }
 .header-checkout{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
 }
 .Header-alert {
   position: relative;
-  left: 10px;
+  left: 15px;
   top:10px;
   font-weight: 400;
   border-radius: 50%;
