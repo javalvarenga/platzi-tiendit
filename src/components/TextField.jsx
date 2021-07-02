@@ -5,8 +5,7 @@ import '../styles/components/TextField.css'
 export const TextField = ({ placeholder, ...props }) => {
   const [field, meta] = useField(props);
 
-//   console.log("field:", field);
-//   console.log("meta:", meta);
+
 
   return (
     <div className="inputContainer">
