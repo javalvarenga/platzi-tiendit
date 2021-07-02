@@ -7874,7 +7874,7 @@ function Map(_ref) {
     googleMapsApiKey: "AIzaSyDTJRdwTi2LKOe8hvPrzjDEqlV-Z5mO7g0"
   }, /*#__PURE__*/react.createElement(GoogleMap, {
     mapContainerStyle: mapStyles,
-    zoom: 9,
+    zoom: 15,
     center: defaultCenter
   }, /*#__PURE__*/react.createElement(Marker, {
     position: defaultCenter
@@ -8073,6 +8073,8 @@ var _excluded = ["placeholder"];
   enterModule && enterModule(module);
 })();
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8094,6 +8096,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 };
 
 
+
  // eslint-disable-next-line import/prefer-default-export
 
 var TextField = function TextField(_ref) {
@@ -8103,16 +8106,20 @@ var TextField = function TextField(_ref) {
   var _useField = (0,formik__WEBPACK_IMPORTED_MODULE_1__/* .useField */ .U$)(props),
       _useField2 = _slicedToArray(_useField, 2),
       field = _useField2[0],
-      meta = _useField2[1]; //   console.log("field:", field);
-  //   console.log("meta:", meta);
-
+      meta = _useField2[1];
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "inputContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", _extends({
     type: "text",
-    placeholder: field.name
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(formik__WEBPACK_IMPORTED_MODULE_1__/* .ErrorMessage */ .Bc, {
+    placeholder: field.name // eslint-disable-next-line react/jsx-props-no-spreading
+
+  }, field, props, {
+    autoComplete: "off",
+    className: "".concat(meta.touched && meta.error && 'is-invalid', " ")
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(formik__WEBPACK_IMPORTED_MODULE_1__/* .ErrorMessage */ .Bc, {
+    component: "div",
+    className: "errorMessage",
     name: field.name
   }));
 };
@@ -8212,7 +8219,7 @@ function Checkout() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h3", null, "Precio Total: $", handleSumTotal()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__/* .Link */ .rU, {
     to: "/checkout/information"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-    type: "submit"
+    type: "button"
   }, "Continuar pedido"))));
 }
 
@@ -10694,15 +10701,15 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 function Information() {
   var validate = object_create({
-    name: string_create().max(15, "Debe tener 15 caracteres o menos").required('Campo Requerido'),
-    email: string_create().max(25, "Debe tener 25 caracteres o menos").required('Campo Requerido'),
-    address: string_create().max(50, "Debe tener 50 caracteres o menos").required('Campo Requerido'),
-    apto: string_create().max(15, "Debe tener 15 caracteres o menos").required('Campo Requerido'),
-    city: string_create().max(25, "Debe tener 25 caracteres o menos").required('Campo Requerido'),
-    country: string_create().max(25, "Debe tener 25 caracteres o menos").required('Campo Requerido'),
-    state: string_create().max(25, "Debe tener 25 caracteres o menos").required('Campo Requerido'),
-    cp: string_create().max(10, "Debe tener 10 caracteres o menos").required('Campo Requerido'),
-    phone: string_create().min(8, "debe tener 8 o más caracteres").max(12, "Debe menos de 12 caracteres").required('Campo Requerido')
+    name: string_create().max(35, 'Debe tener 35 caracteres o menos').required('Campo Requerido'),
+    email: string_create().max(25, 'Debe tener 25 caracteres o menos').required('Campo Requerido'),
+    address: string_create().max(50, 'Debe tener 50 caracteres o menos').required('Campo Requerido'),
+    apto: string_create().max(15, 'Debe tener 15 caracteres o menos').required('Campo Requerido'),
+    city: string_create().max(25, 'Debe tener 25 caracteres o menos').required('Campo Requerido'),
+    country: string_create().max(25, 'Debe tener 25 caracteres o menos').required('Campo Requerido'),
+    state: string_create().max(25, 'Debe tener 25 caracteres o menos').required('Campo Requerido'),
+    cp: string_create().max(10, 'Debe tener 10 caracteres o menos').required('Campo Requerido'),
+    phone: string_create().min(8, 'debe tener 8 o más caracteres').max(12, 'Debe menos de 12 caracteres').required('Campo Requerido')
   });
 
   var _useContext = (0,react.useContext)(AppContext/* default */.Z),
@@ -10710,26 +10717,20 @@ function Information() {
       addToBuyer = _useContext.addToBuyer;
 
   var cart = state.cart;
-  var form = (0,react.useRef)(null);
   var history = (0,react_router/* useHistory */.k6)();
 
-  var handleSubmit = function handleSubmit() {
-    var formData = new FormData(form.current);
-    formData.values();
+  var validationBuyer = function validationBuyer(Buyer) {
+    if (Buyer.name === '' || Buyer.email === '' || Buyer.address === '' || Buyer.address === '' || Buyer.apto === '' || Buyer.city === '' || Buyer.country === '' || Buyer.state === '' || Buyer.cp === '' || Buyer.phone === '') {
+      return false;
+    }
 
-    if (true) {
-      var buyer = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        address: formData.get('address'),
-        apto: formData.get('apto'),
-        city: formData.get('city'),
-        country: formData.get('country'),
-        state: formData.get('state'),
-        cp: formData.get('cp'),
-        phone: formData.get('phone')
-      };
-      addToBuyer(buyer);
+    return true;
+  };
+
+  var handleSubmit = function handleSubmit(Buyer) {
+    // console.log(Buyer);
+    if (validationBuyer(Buyer)) {
+      addToBuyer(Buyer);
       history.push('/checkout/payment');
     }
   };
@@ -10765,56 +10766,53 @@ function Information() {
     },
     validationSchema: validate
   }, function (formik) {
-    return /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("h1", null, "Information"), console.log(formik), /*#__PURE__*/react.createElement(formik_esm/* Form */.l0, null, /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Nombre completo",
+    return /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("h1", null, "Information"), /*#__PURE__*/react.createElement(formik_esm/* Form */.l0, null, /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
+      name: "name",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Email",
+      name: "email",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Direccion",
+      name: "address",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Apartamento/Casa",
+      name: "apto",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Ciudad",
+      name: "city",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Pa\xEDs",
+      name: "country",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "Estado",
+      name: "state",
       type: "text"
     }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
-      placeholder: "Nombre Completo",
-      name: "C\xF3digo postal",
+      name: "cp",
       type: "text"
-    })));
-  })), /*#__PURE__*/react.createElement("div", {
-    className: "Information-buttons"
-  }, /*#__PURE__*/react.createElement("div", {
-    className: "Information-back"
-  }, /*#__PURE__*/react.createElement(react_router_dom/* Link */.rU, {
-    to: "/checkout"
-  }, /*#__PURE__*/react.createElement("i", {
-    className: "fas fa-arrow-left"
-  }))), /*#__PURE__*/react.createElement("div", {
-    className: "Information-next"
-  }, /*#__PURE__*/react.createElement("button", {
-    type: "button",
-    onClick: handleSubmit
-  }, "Pagar")))));
+    }), /*#__PURE__*/react.createElement(TextField/* TextField */.n, {
+      name: "phone",
+      type: "text"
+    }), /*#__PURE__*/react.createElement("div", {
+      className: "Information-buttons"
+    }, /*#__PURE__*/react.createElement("div", {
+      className: "Information-back"
+    }, /*#__PURE__*/react.createElement(react_router_dom/* Link */.rU, {
+      to: "/checkout"
+    }, /*#__PURE__*/react.createElement("i", {
+      className: "fas fa-arrow-left"
+    }))), /*#__PURE__*/react.createElement("div", {
+      className: "Information-next"
+    }, /*#__PURE__*/react.createElement("button", {
+      type: "submit",
+      onClick: function onClick() {
+        return handleSubmit(formik.values);
+      }
+    }, "Pagar")))));
+  }))));
 }
 
-__signature__(Information, "useContext{{ state, addToBuyer }}\nuseRef{form}\nuseHistory{history}", function () {
+__signature__(Information, "useContext{{ state, addToBuyer }}\nuseHistory{history}", function () {
   return [react_router/* useHistory */.k6];
 });
 
