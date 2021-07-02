@@ -63,7 +63,7 @@ function Information() {
   };
 
   const handleSubmit = (Buyer) => {
-    console.log(Buyer);
+    // console.log(Buyer);
     if (validationBuyer(Buyer)) {
       addToBuyer(Buyer);
       history.push('/checkout/payment');
@@ -105,7 +105,7 @@ function Information() {
             {(formik) => (
               <div>
                 <h1>Information</h1>
-                {console.log(formik.values)}
+                {/* {console.log(formik.values)} */}
                 <Form>
                   <TextField name="name" type="text" />
                   <TextField name="email" type="text" />
